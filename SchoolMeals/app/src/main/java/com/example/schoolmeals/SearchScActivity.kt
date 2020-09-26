@@ -1,10 +1,13 @@
 package com.example.schoolmeals
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_search_sc.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -28,6 +31,10 @@ class SearchScActivity : AppCompatActivity() {
             getScAPI()
         }
         }
+
+
+
+
 
     }
 
@@ -58,6 +65,23 @@ class SearchScActivity : AppCompatActivity() {
                             false
                         )
                         Rv.setHasFixedSize(true)
+
+                        adapter.setItemClickListener(object : ScListAdapter.ItemClickListener{
+                            override fun onClick(view: View, position: Int) {
+                                data.data?.sc_list?.get(0)?.school_name?.let {
+                                    MyApplication.prefs.setString("SchoolName", it)
+                                }
+                                data.data?.sc_list?.get(0)?.a_sc_code?.let {
+                                    MyApplication.prefs.setString("ascCode",it)
+                                }
+                                data.data?.sc_list?.get(0)?.sc_code?.let {
+                                    MyApplication.prefs.setString("scCode",it)
+                                }
+                                val intent = Intent(this@SearchScActivity,MainActivity::class.java)
+                                startActivity(intent)
+                            }
+                        })
+
                     }
                 }else{
                     Toast.makeText(this@SearchScActivity, "학교를 찾을수 없어요.", Toast.LENGTH_SHORT).show()
@@ -70,6 +94,5 @@ class SearchScActivity : AppCompatActivity() {
             }
         })
     }
-
 
 }

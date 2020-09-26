@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
 class ScListAdapter (val items : ScResponse) : RecyclerView.Adapter<ScListAdapter.ViewHolder>(){
@@ -27,7 +28,13 @@ class ScListAdapter (val items : ScResponse) : RecyclerView.Adapter<ScListAdapte
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(items.data?.sc_list?.get(position)!!)
+        holder.itemView.setOnClickListener{
+            itemClickListner.onClick(it,position)
+        }
+    }
 
+    fun setItemClickListener(itemClickListener: ItemClickListener) {
+        this.itemClickListner = itemClickListener
     }
 
     inner class ViewHolder (v: View) : RecyclerView.ViewHolder(v) {
