@@ -9,7 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
-class ScListAdapter (val items : ScResponse) : RecyclerView.Adapter<ScListAdapter.ViewHolder>(){
+class ScListAdapter(val items: ScResponse) : RecyclerView.Adapter<ScListAdapter.ViewHolder>() {
 
     interface ItemClickListener {
         fun onClick(view: View, position: Int)
@@ -22,14 +22,15 @@ class ScListAdapter (val items : ScResponse) : RecyclerView.Adapter<ScListAdapte
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val inflatedView = LayoutInflater.from(parent.context).inflate(R.layout.sclistitem, parent, false)
+        val inflatedView =
+            LayoutInflater.from(parent.context).inflate(R.layout.sclistitem, parent, false)
         return ViewHolder(inflatedView)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(items.data?.sc_list?.get(position)!!)
-        holder.itemView.setOnClickListener{
-            itemClickListner.onClick(it,position)
+        holder.itemView.setOnClickListener {
+            itemClickListner.onClick(it, position)
         }
     }
 
@@ -37,7 +38,7 @@ class ScListAdapter (val items : ScResponse) : RecyclerView.Adapter<ScListAdapte
         this.itemClickListner = itemClickListener
     }
 
-    inner class ViewHolder (v: View) : RecyclerView.ViewHolder(v) {
+    inner class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
 
         val tvName = itemView.findViewById<TextView>(R.id.tv_name)
         val tvAdress = itemView.findViewById<TextView>(R.id.tv_Adress)
@@ -46,7 +47,7 @@ class ScListAdapter (val items : ScResponse) : RecyclerView.Adapter<ScListAdapte
             tvName.text = itemView.school_name
             Log.d("TAG", "학교 이름 ${itemView.school_name}")
             tvAdress.text = itemView.address
-            Log.d("TAG", "학교 주소 ${ itemView.address}")
+            Log.d("TAG", "학교 주소 ${itemView.address}")
         }
 
     }

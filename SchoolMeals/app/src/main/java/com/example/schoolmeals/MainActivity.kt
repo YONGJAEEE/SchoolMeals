@@ -20,17 +20,17 @@ class MainActivity : AppCompatActivity() {
 
 
         if (ScName == "null" && ascCode == "null" && scCode == "null") {
-            val intent = Intent(this,SearchScActivity::class.java)
+            val intent = Intent(this, SearchScActivity::class.java)
             startActivity(intent)
-        }else{
+        } else {
             SchoolName.setText(ScName)
             Schoolcode.setText(ascCode)
             Schoolcode2.setText(scCode)
         }
 
 
-//        val dateToday = Timestamp(System.currentTimeMillis()).time
-//
-//        sample.setText("${dateToday}")
+        val dateToday = Timestamp(System.currentTimeMillis()).time
+
+        date.setText("${dateToday}")
     }
 }

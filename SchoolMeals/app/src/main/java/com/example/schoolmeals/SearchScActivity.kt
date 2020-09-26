@@ -28,12 +28,9 @@ class SearchScActivity : AppCompatActivity() {
             if (et_search.text.toString() == "") {
                 Toast.makeText(this, "학교명을 입력해주세요.", Toast.LENGTH_SHORT).show()
             } else {
-            getScAPI()
+                getScAPI()
+            }
         }
-        }
-
-
-
 
 
     }
@@ -56,7 +53,8 @@ class SearchScActivity : AppCompatActivity() {
                 val data = response.body()
                 if (data != null) {
                     if (data.status == 200) {
-                        Toast.makeText(this@SearchScActivity, data.message, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@SearchScActivity, data.message, Toast.LENGTH_SHORT)
+                            .show()
                         val adapter = ScListAdapter(data)
                         Rv.adapter = adapter
                         Rv.layoutManager = LinearLayoutManager(
@@ -66,24 +64,24 @@ class SearchScActivity : AppCompatActivity() {
                         )
                         Rv.setHasFixedSize(true)
 
-                        adapter.setItemClickListener(object : ScListAdapter.ItemClickListener{
+                        adapter.setItemClickListener(object : ScListAdapter.ItemClickListener {
                             override fun onClick(view: View, position: Int) {
                                 data.data?.sc_list?.get(0)?.school_name?.let {
                                     MyApplication.prefs.setString("SchoolName", it)
                                 }
                                 data.data?.sc_list?.get(0)?.a_sc_code?.let {
-                                    MyApplication.prefs.setString("ascCode",it)
+                                    MyApplication.prefs.setString("ascCode", it)
                                 }
                                 data.data?.sc_list?.get(0)?.sc_code?.let {
-                                    MyApplication.prefs.setString("scCode",it)
+                                    MyApplication.prefs.setString("scCode", it)
                                 }
-                                val intent = Intent(this@SearchScActivity,MainActivity::class.java)
+                                val intent = Intent(this@SearchScActivity, MainActivity::class.java)
                                 startActivity(intent)
                             }
                         })
 
                     }
-                }else{
+                } else {
                     Toast.makeText(this@SearchScActivity, "학교를 찾을수 없어요.", Toast.LENGTH_SHORT).show()
                 }
             }
