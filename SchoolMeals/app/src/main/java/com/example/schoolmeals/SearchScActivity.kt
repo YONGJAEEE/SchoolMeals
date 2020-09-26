@@ -20,12 +20,13 @@ class SearchScActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_sc)
 
+
         searchbutton.setOnClickListener() {
             if (et_search.text.toString() == "") {
                 Toast.makeText(this, "학교명을 입력해주세요.", Toast.LENGTH_SHORT).show()
             } else {
-                getScAPI()
-            }
+            getScAPI()
+        }
         }
 
     }
@@ -57,7 +58,6 @@ class SearchScActivity : AppCompatActivity() {
                             false
                         )
                         Rv.setHasFixedSize(true)
-
                     }
                 }else{
                     Toast.makeText(this@SearchScActivity, "학교를 찾을수 없어요.", Toast.LENGTH_SHORT).show()

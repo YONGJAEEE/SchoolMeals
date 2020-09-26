@@ -13,6 +13,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+
 //        val dateToday = Timestamp(System.currentTimeMillis()).time
 //
 //        sample.setText("${dateToday}")

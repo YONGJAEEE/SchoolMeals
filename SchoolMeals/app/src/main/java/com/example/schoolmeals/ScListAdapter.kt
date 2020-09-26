@@ -10,6 +10,12 @@ import androidx.recyclerview.widget.RecyclerView
 
 class ScListAdapter (val items : ScResponse) : RecyclerView.Adapter<ScListAdapter.ViewHolder>(){
 
+    interface ItemClickListener {
+        fun onClick(view: View, position: Int)
+    }
+
+    private lateinit var itemClickListner: ItemClickListener
+
     override fun getItemCount(): Int {
         return items.data?.sc_list?.size ?: 0
     }
