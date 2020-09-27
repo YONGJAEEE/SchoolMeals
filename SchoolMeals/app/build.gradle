@@ -43,4 +43,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
     implementation 'com.google.code.gson:gson:2.8.5'
 
+    //뷰페이저
+    implementation 'me.relex:circleindicator:1.2.2'
+
 }
