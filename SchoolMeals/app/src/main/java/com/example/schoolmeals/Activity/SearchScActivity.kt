@@ -1,4 +1,4 @@
-package com.example.schoolmeals
+package com.example.schoolmeals.Activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,7 +7,11 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.example.schoolmeals.MyApplication
+import com.example.schoolmeals.R
+import com.example.schoolmeals.Responses.ScResponse
+import com.example.schoolmeals.API.ScListAPI
+import com.example.schoolmeals.Adapter.ScListAdapter
 import kotlinx.android.synthetic.main.activity_search_sc.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -53,17 +57,12 @@ class SearchScActivity : AppCompatActivity() {
                 val data = response.body()
                 if (data != null) {
                     if (data.status == 200) {
-                        Toast.makeText(this@SearchScActivity, data.message, Toast.LENGTH_SHORT)
-                            .show()
+                        Toast.makeText(this@SearchScActivity, data.message, Toast.LENGTH_SHORT).show()
                         val adapter = ScListAdapter(data)
                         Rv.adapter = adapter
-                        Rv.layoutManager = LinearLayoutManager(
-                            this@SearchScActivity,
-                            LinearLayoutManager.VERTICAL,
-                            false
-                        )
+                        Rv.layoutManager = LinearLayoutManager(this@SearchScActivity,LinearLayoutManager.VERTICAL,false)
                         Rv.setHasFixedSize(true)
-
+                        nullSearch.setText("")
                         adapter.setItemClickListener(object : ScListAdapter.ItemClickListener {
                             override fun onClick(view: View, position: Int) {
                                 data.data?.sc_list?.get(0)?.school_name?.let {
@@ -82,6 +81,7 @@ class SearchScActivity : AppCompatActivity() {
 
                     }
                 } else {
+                    nullSearch.setText("검색 결과가 없습니다.")
                     Toast.makeText(this@SearchScActivity, "학교를 찾을수 없어요.", Toast.LENGTH_SHORT).show()
                 }
             }

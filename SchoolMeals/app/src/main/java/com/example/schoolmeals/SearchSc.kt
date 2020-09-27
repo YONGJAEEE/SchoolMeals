@@ -1,5 +1,6 @@
 package com.example.schoolmeals
 
+import com.example.schoolmeals.API.ScListAPI
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

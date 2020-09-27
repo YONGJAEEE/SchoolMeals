@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#50CCCCCC"
-    tools:context=".SearchScActivity">
+    tools:context=".Activity.SearchScActivity">
 
     <LinearLayout
         android:id="@+id/searchTab"
@@ -40,6 +40,16 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/nullSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/bmhanna"
+        android:text="검색 결과가 없습니다."
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchTab"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/Rv"

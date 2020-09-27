@@ -1,4 +1,4 @@
-package com.example.schoolmeals
+package com.example.schoolmeals.Adapter
 
 
 import android.util.Log
@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.schoolmeals.R
+import com.example.schoolmeals.Responses.ScResponse
+import com.example.schoolmeals.Responses.Sc_list
 
 class ScListAdapter(val items: ScResponse) : RecyclerView.Adapter<ScListAdapter.ViewHolder>() {
 
