@@ -9,6 +9,7 @@ import com.example.schoolmeals.MyApplication
 import com.example.schoolmeals.R
 import kotlinx.android.synthetic.main.activity_main.*
 import java.sql.Timestamp
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
@@ -29,9 +30,7 @@ class MainActivity : AppCompatActivity() {
             tv_ScName.setText(ScName)
 
 
-
-
-        val dateToday = Timestamp(System.currentTimeMillis()).time*1000
+        val dateToday = (Timestamp(System.currentTimeMillis()).time / 1000L)
         tv_date.setText(dateToday.toString())
     }
 }

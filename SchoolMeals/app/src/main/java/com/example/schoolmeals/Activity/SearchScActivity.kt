@@ -1,9 +1,11 @@
 package com.example.schoolmeals.Activity
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,6 +34,9 @@ class SearchScActivity : AppCompatActivity() {
             if (et_search.text.toString() == "") {
                 Toast.makeText(this, "학교명을 입력해주세요.", Toast.LENGTH_SHORT).show()
             } else {
+                var view = this.currentFocus
+                val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
                 getScAPI()
             }
         }
