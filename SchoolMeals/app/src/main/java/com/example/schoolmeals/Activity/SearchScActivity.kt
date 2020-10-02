@@ -7,7 +7,9 @@ import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.view.ContextThemeWrapper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.schoolmeals.MyApplication
 import com.example.schoolmeals.R
@@ -62,25 +64,50 @@ class SearchScActivity : AppCompatActivity() {
                 val data = response.body()
                 if (data != null) {
                     if (data.status == 200) {
-                        Toast.makeText(this@SearchScActivity, data.message, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@SearchScActivity, data.message, Toast.LENGTH_SHORT)
+                            .show()
                         val adapter = ScListAdapter(data)
                         Rv.adapter = adapter
-                        Rv.layoutManager = LinearLayoutManager(this@SearchScActivity,LinearLayoutManager.VERTICAL,false)
+                        Rv.layoutManager = LinearLayoutManager(
+                            this@SearchScActivity,
+                            LinearLayoutManager.VERTICAL,
+                            false
+                        )
                         Rv.setHasFixedSize(true)
                         nullSearch.setText("")
                         adapter.setItemClickListener(object : ScListAdapter.ItemClickListener {
                             override fun onClick(view: View, position: Int) {
-                                data.data?.sc_list?.get(0)?.school_name?.let {
-                                    MyApplication.prefs.setString("SchoolName", it)
+
+                                val builder = AlertDialog.Builder(
+                                    ContextThemeWrapper(
+                                        this@SearchScActivity,
+                                        R.style.Theme_AppCompat_Light_Dialog
+                                    )
+                                )
+                                builder.setTitle("학교 선택")
+                                builder.setMessage("${data.data?.sc_list?.get(0)?.school_name}으로 선택하시겠습니까?")
+
+                                builder.setPositiveButton("확인") { dialog, id ->
+                                    data.data?.sc_list?.get(0)?.school_name?.let {
+                                        MyApplication.prefs.setString("SchoolName", it)
+                                    }
+                                    data.data?.sc_list?.get(0)?.a_sc_code?.let {
+                                        MyApplication.prefs.setString("ascCode", it)
+                                    }
+                                    data.data?.sc_list?.get(0)?.sc_code?.let {
+                                        MyApplication.prefs.setString("scCode", it)
+                                    }
+                                    val intent =
+                                        Intent(this@SearchScActivity, MainActivity::class.java)
+                                    startActivity(intent)
                                 }
-                                data.data?.sc_list?.get(0)?.a_sc_code?.let {
-                                    MyApplication.prefs.setString("ascCode", it)
+                                builder.setNegativeButton("취소") { dialog, id ->
+                                    Toast.makeText(this@SearchScActivity, "학교 선택을 취소했어요.", Toast.LENGTH_SHORT).show()
                                 }
-                                data.data?.sc_list?.get(0)?.sc_code?.let {
-                                    MyApplication.prefs.setString("scCode", it)
-                                }
-                                val intent = Intent(this@SearchScActivity, MainActivity::class.java)
-                                startActivity(intent)
+
+                                builder.show()
+
+
                             }
                         })
 
