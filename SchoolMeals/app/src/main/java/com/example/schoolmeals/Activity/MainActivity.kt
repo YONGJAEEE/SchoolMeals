@@ -76,15 +76,12 @@ class MainActivity : AppCompatActivity() {
                 tv_date.text = response.body()?.time.toString()
 
                 if (response.body()?.breakfast?.lists != null) {
-                    Log.d("fuck", response.body()?.breakfast?.lists.toString())
                     tv_breakfast.setText(response.body()?.breakfast?.lists.toString().replace("<br/>","\n"))
                 }
                 if (response.body()?.lunch?.lists != null) {
-                    Log.d("fuck", response.body()?.lunch?.lists.toString())
                     tv_lunch.setText(response.body()?.lunch?.lists.toString().replace("<br/>","\n"))
                 }
                 if (response.body()?.dinner?.lists != null) {
-                    Log.d("fuck", response.body()?.dinner?.lists.toString())
                     tv_dinner.setText(response.body()?.dinner?.lists.toString().replace("<br/>","\n"))
                 }
             }
