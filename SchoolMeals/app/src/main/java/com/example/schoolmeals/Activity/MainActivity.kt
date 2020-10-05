@@ -1,11 +1,13 @@
 package com.example.schoolmeals.Activity
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.PagerAdapter
 import com.example.schoolmeals.API.MealsAPI
@@ -25,15 +27,20 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.sql.Timestamp
+import java.time.LocalDate
+import java.util.*
+import kotlin.collections.ArrayList
 
-
+@RequiresApi(Build.VERSION_CODES.O)
 class MainActivity : AppCompatActivity() {
 
     var viewList = ArrayList<View>()
 
     val BASE_URL = "https://kyj-school-server.herokuapp.com/"
 
-    var dateToday = (Timestamp(System.currentTimeMillis()).time / 1000L) * 1000 + 86400000 + 86400000
+    var dateToday = (Timestamp(System.currentTimeMillis()).time / 1000L) * 1000
+
+    var realDate: LocalDate = LocalDate.now()
 
     var ScName = MyApplication.prefs.getString("SchoolName", "null")
     var ascCode = MyApplication.prefs.getString("ascCode", "null")
@@ -60,20 +67,29 @@ class MainActivity : AppCompatActivity() {
         tv_ScName.setText(ScName)
 
         Log.d("time", dateToday.toString())
-
+        tv_date.setText(realDate.toString())
         getMeals(dateToday)
 
-        btn_before.setOnClickListener(){
+        btn_before.setOnClickListener() {
             dateToday -= 86400000
+            realDate = realDate.minusDays(1)
+            tv_date.setText(realDate.toString())
             getMeals(dateToday)
         }
-        btn_next.setOnClickListener(){
+        btn_next.setOnClickListener() {
             dateToday += 86400000
+            realDate = realDate.plusDays(1)
+            tv_date.setText(realDate.toString())
             getMeals(dateToday)
+        }
+
+        btn_setting.setOnClickListener(){
+            var intent = Intent(this, SearchScActivity::class.java)
+            startActivity(intent)
         }
     }
 
-    fun getMeals(date : Long) {
+    fun getMeals(date: Long) {
         val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -87,16 +103,27 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<MealsResponse>, response: Response<MealsResponse>) {
 
                 Log.d("Sucess", response.body().toString())
-                tv_date.text = response.body()?.time.toString()
 
                 if (response.body()?.breakfast?.lists != null) {
-                    viewList[0].tv_breakfast.setText(response.body()?.breakfast?.lists.toString().replace("<br/>","\n"))
+                    viewList[0].tv_breakfast.setText(
+                        response.body()?.breakfast?.lists.toString().replace("<br/>", "\n")
+                    )
+                } else if (response.body()?.breakfast?.lists == null) {
+                    viewList[0].tv_breakfast.setText("급식이 존재하지 않아요.")
                 }
                 if (response.body()?.lunch?.lists != null) {
-                    viewList[1].tv_lunch.setText(response.body()?.lunch?.lists.toString().replace("<br/>","\n"))
+                    viewList[1].tv_lunch.setText(
+                        response.body()?.lunch?.lists.toString().replace("<br/>", "\n")
+                    )
+                } else if (response.body()?.lunch?.lists == null) {
+                    viewList[1].tv_lunch.setText("급식이 존재하지 않아요.")
                 }
                 if (response.body()?.dinner?.lists != null) {
-                    viewList[2].tv_dinner.setText(response.body()?.dinner?.lists.toString().replace("<br/>","\n"))
+                    viewList[2].tv_dinner.setText(
+                        response.body()?.dinner?.lists.toString().replace("<br/>", "\n")
+                    )
+                } else if (response.body()?.dinner?.lists == null) {
+                    viewList[2].tv_dinner.setText("급식이 존재하지 않아요.")
                 }
             }
 
