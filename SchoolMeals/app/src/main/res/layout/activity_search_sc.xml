@@ -24,9 +24,9 @@
             android:layout_marginTop="4dp"
             android:layout_marginEnd="4dp"
             android:background="@null"
-            android:fontFamily="@font/bmhanna"
+            android:fontFamily="@font/bmhannaair"
             android:hint="학교 이름을 입력해주세요!"
-            android:textSize="22sp" />
+            android:textSize="16sp" />
 
         <ImageButton
             android:id="@+id/searchbutton"

@@ -106,21 +106,21 @@ class MainActivity : AppCompatActivity() {
 
                 if (response.body()?.breakfast?.lists != null) {
                     viewList[0].tv_breakfast.setText(
-                        response.body()?.breakfast?.lists.toString().replace("<br/>", "\n")
+                        response.body()?.breakfast?.lists.toString().replace("<br/>", "\n\n")
                     )
                 } else if (response.body()?.breakfast?.lists == null) {
                     viewList[0].tv_breakfast.setText("급식이 존재하지 않아요.")
                 }
                 if (response.body()?.lunch?.lists != null) {
                     viewList[1].tv_lunch.setText(
-                        response.body()?.lunch?.lists.toString().replace("<br/>", "\n")
+                        response.body()?.lunch?.lists.toString().replace("<br/>", "\n\n")
                     )
                 } else if (response.body()?.lunch?.lists == null) {
                     viewList[1].tv_lunch.setText("급식이 존재하지 않아요.")
                 }
                 if (response.body()?.dinner?.lists != null) {
                     viewList[2].tv_dinner.setText(
-                        response.body()?.dinner?.lists.toString().replace("<br/>", "\n")
+                        response.body()?.dinner?.lists.toString().replace("<br/>", "\n\n")
                     )
                 } else if (response.body()?.dinner?.lists == null) {
                     viewList[2].tv_dinner.setText("급식이 존재하지 않아요.")
