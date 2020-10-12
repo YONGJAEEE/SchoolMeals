@@ -6,6 +6,6 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ScListAPI {
-    @GET("school")
-    fun SearchSc(@Query("name") name : String): Call<ScResponse>
+    @GET("search")
+    fun SearchSc(@Query("school_name") name : String): Call<ScResponse>
 }

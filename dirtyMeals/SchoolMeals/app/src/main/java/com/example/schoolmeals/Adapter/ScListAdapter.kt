@@ -9,7 +9,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schoolmeals.R
 import com.example.schoolmeals.Responses.ScResponse
-import com.example.schoolmeals.Responses.Sc_list
+import com.example.schoolmeals.Responses.School
+
 
 class ScListAdapter(val items: ScResponse) : RecyclerView.Adapter<ScListAdapter.ViewHolder>() {
 
@@ -45,11 +46,11 @@ class ScListAdapter(val items: ScResponse) : RecyclerView.Adapter<ScListAdapter.
         val tvName = itemView.findViewById<TextView>(R.id.tv_name)
         val tvAdress = itemView.findViewById<TextView>(R.id.tv_Adress)
 
-        fun bind(itemView: Sc_list) {
+        fun bind(itemView: School) {
             tvName.text = itemView.school_name
             Log.d("TAG", "학교 이름 ${itemView.school_name}")
-            tvAdress.text = itemView.address
-            Log.d("TAG", "학교 주소 ${itemView.address}")
+            tvAdress.text = itemView.school_locate
+            Log.d("TAG", "학교 주소 ${itemView.school_locate}")
         }
 
     }

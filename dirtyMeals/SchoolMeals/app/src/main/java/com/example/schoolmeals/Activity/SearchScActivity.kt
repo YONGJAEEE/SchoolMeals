@@ -91,10 +91,10 @@ class SearchScActivity : AppCompatActivity() {
                                     data.data?.sc_list?.get(0)?.school_name?.let {
                                         MyApplication.prefs.setString("SchoolName", it)
                                     }
-                                    data.data?.sc_list?.get(0)?.a_sc_code?.let {
+                                    data.data?.sc_list?.get(0)?.office_code?.let {
                                         MyApplication.prefs.setString("ascCode", it)
                                     }
-                                    data.data?.sc_list?.get(0)?.sc_code?.let {
+                                    data.data?.sc_list?.get(0)?.school_id?.let {
                                         MyApplication.prefs.setString("scCode", it)
                                     }
                                     val intent =

@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.PagerAdapter
@@ -15,11 +14,8 @@ import com.example.schoolmeals.MyApplication
 import com.example.schoolmeals.R
 import com.example.schoolmeals.Responses.MealsResponse
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.breakfastpage.*
 import kotlinx.android.synthetic.main.breakfastpage.view.*
-import kotlinx.android.synthetic.main.dinnerpage.*
 import kotlinx.android.synthetic.main.dinnerpage.view.*
-import kotlinx.android.synthetic.main.lunchpage.*
 import kotlinx.android.synthetic.main.lunchpage.view.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -28,7 +24,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.sql.Timestamp
 import java.time.LocalDate
-import java.util.*
 import kotlin.collections.ArrayList
 
 @RequiresApi(Build.VERSION_CODES.O)

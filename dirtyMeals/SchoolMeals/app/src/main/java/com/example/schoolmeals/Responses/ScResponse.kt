@@ -9,12 +9,12 @@ data class ScResponse(
 )
 
 data class Data(
-    val sc_list: List<Sc_list?>?
+    val sc_list: List<School?>?
 )
 
-data class Sc_list(
+data class School(
     val school_name: String?,
-    val a_sc_code: String?,
-    val sc_code: String?,
-    val address: String?
+    val office_code: String?,
+    val school_id: String?,
+    val school_locate: String?
 )
