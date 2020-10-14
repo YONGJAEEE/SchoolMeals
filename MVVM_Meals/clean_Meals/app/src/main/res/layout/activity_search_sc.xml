@@ -2,7 +2,7 @@
 <layout>
     <data>
         <variable
-            name="viewModel"
+            name="SearchScViewModel"
             type="com.example.clean_meals.viewmodel.SearchScViewModel" />
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
@@ -32,11 +32,13 @@
             android:layout_marginEnd="4dp"
             android:background="@null"
             android:fontFamily="@font/bmhannaair"
+            android:text="@={SearchScViewModel.et_School}"
             android:hint="학교 이름을 입력해주세요!"
             android:textSize="16sp" />
 
         <ImageButton
             android:id="@+id/searchbutton"
+            android:onClick="@{()->SearchScViewModel.SearchScClcik()}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
@@ -51,7 +53,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/bmhanna"
-        android:text="@={viewModel.nullSearch}"
+        android:text="@={SearchScViewModel.nullSearch}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -65,7 +67,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchTab" />
+        app:layout_constraintTop_toBottomOf="@+id/searchTab"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
