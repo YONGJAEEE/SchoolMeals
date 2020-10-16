@@ -31,7 +31,6 @@
             android:layout_marginTop="4dp"
             android:layout_marginEnd="4dp"
             android:background="@null"
-            android:fontFamily="@font/bmhannaair"
             android:text="@={SearchScViewModel.et_School}"
             android:hint="학교 이름을 입력해주세요!"
             android:textSize="16sp" />

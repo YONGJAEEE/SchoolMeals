@@ -42,8 +42,6 @@ class SearchScActivity : AppCompatActivity() {
                 getScAPI()
             }
         }
-
-
     }
 
     fun getScAPI() {

@@ -7,6 +7,7 @@ import com.example.clean_meals.model.ScResponse
 import com.example.clean_meals.model.School
 import com.example.clean_meals.network.ScListAPI
 import com.example.clean_meals.network.ScListClient
+import com.example.clean_meals.widget.MyApplication
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -20,7 +21,8 @@ class SearchScViewModel : ViewModel(){
     var nullSearch = MutableLiveData<String>()
     var statusValue = MutableLiveData<Int>()
     var schoolList = ArrayList<School>()
-    var et_School = MutableLiveData<String>()
+    var et_School = ""
+    var ScName = ""
 
     init {
         ScClient = ScListClient.getInstance()
@@ -29,8 +31,7 @@ class SearchScViewModel : ViewModel(){
 
     private fun getSchool(){
         ScAPI = ScClient.create(ScListAPI::class.java)
-        ScAPI.SearchSc(et_School.value.toString()).enqueue(object : Callback<ScResponse> {
-
+        ScAPI.SearchSc(et_School).enqueue(object : Callback<ScResponse> {
             override fun onResponse(call: Call<ScResponse>, response: Response<ScResponse>) {
                 val Response = response.body()
                 if (Response != null) {
@@ -39,29 +40,25 @@ class SearchScViewModel : ViewModel(){
                         Log.d("Sucess", Response.toString())
                         schoolList = Response.data?.school as ArrayList<School>
                         nullSearch.value = ""
-                        finishValue.value = true
                         statusValue.value = Response.status
+                        finishValue.value = true
                     } else {
                         Log.d("fail",Response.toString())
                         statusValue.value = Response.status
                     }
                 }
+
                 else{
                     statusValue.value = Response?.status
                 }
             }
 
             override fun onFailure(call: Call<ScResponse>, t: Throwable) {
-                Log.d("fail", t.toString())
+                Log.d("retrofit fail", t.toString())
             }
-
         })
     }
-
     fun SearchScClcik(){
-
             getSchool()
-
     }
-
 }

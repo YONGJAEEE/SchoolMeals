@@ -20,7 +20,7 @@ class SearchScActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_search_sc)
-        viewModel = ViewModelProvider(this)[SearchScViewModel::class.java] 
+        viewModel = ViewModelProvider(this)[SearchScViewModel::class.java]
         binding.searchScViewModel = viewModel
         binding.lifecycleOwner = this
 
@@ -46,7 +46,6 @@ class SearchScActivity : AppCompatActivity() {
                 }
             })
         }
-
     }
 
 }
