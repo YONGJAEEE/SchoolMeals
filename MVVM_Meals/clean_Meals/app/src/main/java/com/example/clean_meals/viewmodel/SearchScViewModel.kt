@@ -7,7 +7,6 @@ import com.example.clean_meals.model.ScResponse
 import com.example.clean_meals.model.School
 import com.example.clean_meals.network.ScListAPI
 import com.example.clean_meals.network.ScListClient
-import com.example.clean_meals.widget.MyApplication
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

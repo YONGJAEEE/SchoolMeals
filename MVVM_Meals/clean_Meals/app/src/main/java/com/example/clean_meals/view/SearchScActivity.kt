@@ -2,8 +2,11 @@ package com.example.clean_meals.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.clean_meals.R
@@ -21,7 +24,7 @@ class SearchScActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_search_sc)
         viewModel = ViewModelProvider(this)[SearchScViewModel::class.java]
-        binding.searchScViewModel = viewModel
+        binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
         with(viewModel) {

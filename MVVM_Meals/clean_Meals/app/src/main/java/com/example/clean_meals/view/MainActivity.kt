@@ -1,5 +1,6 @@
 package com.example.clean_meals.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
@@ -8,7 +9,6 @@ import com.example.clean_meals.R
 import com.example.clean_meals.databinding.ActivityMainBinding
 import com.example.clean_meals.viewmodel.MainViewModel
 import com.example.clean_meals.widget.MyApplication
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,8 +25,9 @@ class MainActivity : AppCompatActivity() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        tv_SchoolName.setText(schoolName)
-        tv_OfficeCode.setText(officeCode)
-        tv_SchoolId.setText(schoolId)
+        if (schoolName=="null" && officeCode=="null" && schoolId=="null"){
+            val intent = Intent(this,SearchScActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

@@ -45,8 +45,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-
         viewList.add(layoutInflater.inflate(R.layout.breakfastpage, null))
         viewList.add(layoutInflater.inflate(R.layout.lunchpage, null))
         viewList.add(layoutInflater.inflate(R.layout.dinnerpage, null))
