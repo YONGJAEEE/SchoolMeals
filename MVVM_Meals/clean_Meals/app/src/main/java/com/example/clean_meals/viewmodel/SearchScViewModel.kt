@@ -16,7 +16,7 @@ class SearchScViewModel : ViewModel(){
 
     lateinit var ScAPI : ScListAPI
     var ScClient : Retrofit
-    var finishValue = MutableLiveData<Boolean>()
+    var createAdapter = MutableLiveData<Boolean>()
     var nullSearch = MutableLiveData<String>()
     var statusValue = MutableLiveData<Int>()
     var schoolList = ArrayList<School>()
@@ -40,7 +40,7 @@ class SearchScViewModel : ViewModel(){
                         schoolList = Response.data?.school as ArrayList<School>
                         nullSearch.value = ""
                         statusValue.value = Response.status
-                        finishValue.value = true
+                        createAdapter.value = true
                     } else {
                         Log.d("fail",Response.toString())
                         statusValue.value = Response.status

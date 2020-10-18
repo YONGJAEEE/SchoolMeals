@@ -29,7 +29,7 @@ class SearchScActivity : AppCompatActivity() {
 
         with(viewModel) {
 
-            finishValue.observe(this@SearchScActivity, Observer {
+            createAdapter.observe(this@SearchScActivity, Observer {
                 val mAdapter = ScListAdapter(schoolList)
                 Rv.adapter = mAdapter
             })

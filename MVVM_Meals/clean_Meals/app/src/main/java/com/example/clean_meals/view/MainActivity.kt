@@ -3,12 +3,15 @@ package com.example.clean_meals.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.clean_meals.R
+import com.example.clean_meals.adapter.MealsPagerAdapter
 import com.example.clean_meals.databinding.ActivityMainBinding
 import com.example.clean_meals.viewmodel.MainViewModel
 import com.example.clean_meals.widget.MyApplication
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,6 +20,9 @@ class MainActivity : AppCompatActivity() {
     var schoolName = MyApplication.prefs.getString("schoolName","null")
     var officeCode = MyApplication.prefs.getString("officeCode","null")
     var schoolId = MyApplication.prefs.getString("schoolId","null")
+
+    var viewList = ArrayList<View>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,5 +35,13 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this,SearchScActivity::class.java)
             startActivity(intent)
         }
+
+        viewList.add(layoutInflater.inflate(R.layout.breakfastpage, null))
+        viewList.add(layoutInflater.inflate(R.layout.lunchpage, null))
+        viewList.add(layoutInflater.inflate(R.layout.dinnerpage, null))
+
+
+        view_MealsPager.adapter = MealsPagerAdapter(viewList,view_MealsPager)
+
     }
 }

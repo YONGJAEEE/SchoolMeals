@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout>
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.clean_meals.viewmodel.LunchViewModel" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -22,7 +29,7 @@
         android:id="@+id/tv_lunch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="급식이 존재하지 않아요."
+        android:text="@{viewModel.LunchList}"
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@+id/lc_title"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,3 +38,4 @@
         android:gravity="center_horizontal"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
