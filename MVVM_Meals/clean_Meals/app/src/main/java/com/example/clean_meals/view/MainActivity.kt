@@ -3,9 +3,12 @@ package com.example.clean_meals.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
+import androidx.viewpager.widget.PagerAdapter
 import com.example.clean_meals.R
 import com.example.clean_meals.adapter.MealsPagerAdapter
 import com.example.clean_meals.databinding.ActivityMainBinding
@@ -26,6 +29,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         binding.viewModel = viewModel
@@ -36,12 +40,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        viewList.add(layoutInflater.inflate(R.layout.breakfastpage, null))
-        viewList.add(layoutInflater.inflate(R.layout.lunchpage, null))
-        viewList.add(layoutInflater.inflate(R.layout.dinnerpage, null))
-
-
-        view_MealsPager.adapter = MealsPagerAdapter(viewList,view_MealsPager)
-
+        val adapter = MealsPagerAdapter(supportFragmentManager)
+        view_MealsPager.adapter = adapter
     }
 }

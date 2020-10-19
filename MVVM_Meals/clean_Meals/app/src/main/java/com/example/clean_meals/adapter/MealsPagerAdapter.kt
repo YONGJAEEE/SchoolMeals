@@ -1,25 +1,32 @@
 package com.example.clean_meals.adapter
 
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
+import com.example.clean_meals.view.BaseFragment
+import com.example.clean_meals.view.BreakfastFragment
+import com.example.clean_meals.view.DinnerFragment
+import com.example.clean_meals.view.LunchFragment
 
-import android.view.View
-import android.view.ViewGroup
-import androidx.viewpager.widget.PagerAdapter
-import androidx.viewpager.widget.ViewPager
 
-class MealsPagerAdapter(var viewList : ArrayList<View>, var viewPager: ViewPager) : PagerAdapter() {
+class MealsPagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager) {
+    private val list: ArrayList<BaseFragment> = ArrayList();
+
+    init {
+        list.add(BreakfastFragment())
+        list.add(LunchFragment())
+        list.add(DinnerFragment())
+    }
+
+    override fun getPageTitle(position: Int): CharSequence? {
+        return list[position].title()
+    }
+
+    override fun getItem(position: Int): Fragment {
+        return list[position]
+    }
+
     override fun getCount(): Int {
-        return viewList.size
-    }
-
-    override fun isViewFromObject(view: View, obj: Any): Boolean {
-        return view == obj
-    }
-    override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        val temp = viewList[position]
-        viewPager.addView(temp)
-        return viewList[position]
-    }
-    override fun destroyItem(container: ViewGroup, position: Int, obj: Any) {
-        viewPager.removeView(obj as View)
+        return list.size
     }
 }
