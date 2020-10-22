@@ -37,7 +37,7 @@
 
         <ImageButton
             android:id="@+id/searchbutton"
-            android:onClick="@{()->viewModel.SearchScClcik()}"
+            android:onClick="@{()->viewModel.searchScClcik()}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"

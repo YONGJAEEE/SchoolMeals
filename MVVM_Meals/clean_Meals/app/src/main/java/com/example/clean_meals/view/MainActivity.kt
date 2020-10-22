@@ -3,10 +3,13 @@ package com.example.clean_meals.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.PagerAdapter
 import com.example.clean_meals.R
@@ -24,9 +27,6 @@ class MainActivity : AppCompatActivity() {
     var officeCode = MyApplication.prefs.getString("officeCode","null")
     var schoolId = MyApplication.prefs.getString("schoolId","null")
 
-    var viewList = ArrayList<View>()
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -40,7 +40,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val adapter = MealsPagerAdapter(supportFragmentManager)
-        view_MealsPager.adapter = adapter
+            val adapter = MealsPagerAdapter(supportFragmentManager)
+            view_MealsPager.adapter = adapter
+            adapter.notifyDataSetChanged()
+
     }
 }

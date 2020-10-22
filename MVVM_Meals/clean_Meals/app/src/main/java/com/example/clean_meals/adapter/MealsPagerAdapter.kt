@@ -10,23 +10,29 @@ import com.example.clean_meals.view.LunchFragment
 
 
 class MealsPagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager) {
-    private val list: ArrayList<BaseFragment> = ArrayList();
-
-    init {
-        list.add(BreakfastFragment())
-        list.add(LunchFragment())
-        list.add(DinnerFragment())
-    }
-
-    override fun getPageTitle(position: Int): CharSequence? {
-        return list[position].title()
-    }
-
     override fun getItem(position: Int): Fragment {
-        return list[position]
+        when(position){
+            0->{
+                val Breafast =
+                    BreakfastFragment()
+                return Breafast
+            }
+            1->{
+                val Lunch =
+                    LunchFragment()
+                return Lunch
+            }
+            2->{
+                val Dinner =
+                    DinnerFragment()
+                return Dinner
+            }
+            else->{
+                return null!!
+            }
+        }
     }
-
     override fun getCount(): Int {
-        return list.size
+        return 3
     }
 }
