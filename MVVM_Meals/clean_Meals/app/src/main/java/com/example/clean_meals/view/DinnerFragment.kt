@@ -49,7 +49,7 @@ class DinnerFragment : BaseFragment() {
     private fun observerVieModel() {
         with(viewModel) {
             DataUtil.meal.observe(viewLifecycleOwner, Observer {
-                dinner.value = it.lunch
+                dinner.value = it.dinner
             })
         }
     }
