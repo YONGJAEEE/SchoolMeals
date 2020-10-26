@@ -48,11 +48,11 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/nullSearch"
+        android:id="@+id/tv_nullSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/bmhanna"
-        android:text="@={viewModel.nullSearch}"
+        android:text="검색 결과가 없습니다."
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

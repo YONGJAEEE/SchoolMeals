@@ -30,6 +30,7 @@
 
     <ImageButton
         android:id="@+id/btn_setting"
+        android:onClick="@{()->viewModel.schoolChange()}"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#f6f6f6"
@@ -40,7 +41,7 @@
 
 
     <LinearLayout
-        android:id="@+id/date"
+        android:id="@+id/layout_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -51,6 +52,7 @@
 
         <ImageButton
             android:id="@+id/btn_before"
+            android:onClick="@{()->viewModel.beforeDay()}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -63,7 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/applegothicbold"
-            android:text="@{viewModel.date.toString()}"
+            android:text="@{viewModel.liveDate}"
             android:textColor="#1b232f"
             android:textSize="16sp" />
 
@@ -71,6 +73,7 @@
             android:id="@+id/btn_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="@{()->viewModel.nextDay()}"
             android:layout_marginStart="32dp"
             android:layout_marginTop="4dp"
             android:background="#f6f6f6"
@@ -79,8 +82,8 @@
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_MealsPager"
-        android:layout_width="320dp"
-        android:layout_height="450dp"
+        android:layout_width="350dp"
+        android:layout_height="510dp"
         android:layout_marginBottom="45dp"
         android:background="@drawable/shadow"
         app:layout_constraintBottom_toBottomOf="parent"

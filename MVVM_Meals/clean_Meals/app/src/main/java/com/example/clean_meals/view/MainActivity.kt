@@ -1,12 +1,14 @@
 package com.example.clean_meals.view
 
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
@@ -19,6 +21,7 @@ import com.example.clean_meals.viewmodel.MainViewModel
 import com.example.clean_meals.widget.MyApplication
 import kotlinx.android.synthetic.main.activity_main.*
 
+@RequiresApi(Build.VERSION_CODES.O)
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding : ActivityMainBinding
@@ -44,5 +47,18 @@ class MainActivity : AppCompatActivity() {
             view_MealsPager.adapter = adapter
             adapter.notifyDataSetChanged()
 
+        with(MainViewModel()){
+            schoolChageValue.observe(this@MainActivity, Observer {
+                if (schoolChageValue.value == true){
+                    startActivity(Intent(this@MainActivity,SearchScActivity::class.java))
+                }
+            })
+
+            liveDate.observe(this@MainActivity, Observer {
+                tv_date.setText(liveDate.value)
+            })
+        }
     }
+
+
 }
