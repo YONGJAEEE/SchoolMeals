@@ -20,7 +20,7 @@ class MainViewModel : ViewModel() {
     var schoolName = MyApplication.prefs.getString("schoolName", "null")
     var officeCode = MyApplication.prefs.getString("officeCode", "null")
     var schoolId = MyApplication.prefs.getString("schoolId", "null")
-    var schoolChageValue = MutableLiveData(false)
+    var schoolChageValue = MutableLiveData<String>()
 
     var date: LocalDate = LocalDate.now()
     var liveDate = MutableLiveData(date.toString())
@@ -41,7 +41,7 @@ class MainViewModel : ViewModel() {
         liveDate.value = date.toString()
     }
     fun schoolChange(){
-        schoolChageValue.value = true
+        schoolChageValue.value = "ok"
     }
 
     private fun getMeals(dateString: String) {
@@ -56,22 +56,23 @@ class MainViewModel : ViewModel() {
                     null,
                     null
                 )
-
-                when(responseData?.data?.meal?.size){
-                    1 ->{
-                        meal.breakfast = responseData.data.meal[0].replace("<br/>","\n\n")
+                Log.d("TAG",responseData.toString())
+                if (responseData?.data != null) {
+                when (responseData.data.meal?.size) {
+                    1 -> {
+                        meal.breakfast = responseData.data.meal[0].replace("<br/>", "\n\n")
                         meal.lunch = null
                         meal.dinner = null
                     }
-                    2 ->{
-                        meal.breakfast = responseData.data.meal[0].replace("<br/>","\n\n")
-                        meal.lunch = responseData.data.meal[1].replace("<br/>","\n\n")
+                    2 -> {
+                        meal.breakfast = response.body()!!.data?.meal?.get(0)?.replace("<br/>", "\n\n")
+                        meal.lunch = responseData.data.meal[1].replace("<br/>", "\n\n")
                         meal.dinner = null
                     }
-                    3 ->{
-                        meal.breakfast = responseData.data.meal[0].replace("<br/>","\n\n")
-                        meal.lunch = responseData.data.meal[1].replace("<br/>","\n\n")
-                        meal.dinner = responseData.data.meal[2].replace("<br/>","\n\n")
+                    3 -> {
+                        meal.breakfast = response.body()!!.data?.meal?.get(0)?.replace("<br/>", "\n\n")
+                        meal.lunch = response.body()!!.data?.meal?.get(1)?.replace("<br/>", "\n\n")
+                        meal.dinner = responseData.data.meal[2].replace("<br/>", "\n\n")
                     }
                 }
 
@@ -84,8 +85,9 @@ class MainViewModel : ViewModel() {
                 if (meal.dinner == null) {
                     meal.dinner = "급식이 없습니다."
                 }
-                Log.d("Success",meal.toString())
+                Log.d("Success", meal.toString())
                 DataUtil.meal.value = meal
+            }
             }
 
             override fun onFailure(call: Call<MealsResponse>, t: Throwable) {

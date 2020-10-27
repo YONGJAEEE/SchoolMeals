@@ -4,16 +4,11 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.viewpager.widget.PagerAdapter
 import com.example.clean_meals.R
 import com.example.clean_meals.adapter.MealsPagerAdapter
 import com.example.clean_meals.databinding.ActivityMainBinding
@@ -49,8 +44,10 @@ class MainActivity : AppCompatActivity() {
 
         with(MainViewModel()){
             schoolChageValue.observe(this@MainActivity, Observer {
-                if (schoolChageValue.value == true){
-                    startActivity(Intent(this@MainActivity,SearchScActivity::class.java))
+                Log.d("TAG","싸발")
+                if (schoolChageValue.value == "ok"){
+                    Log.d("TAG", "ㅈ장애인")
+                    startActivity(Intent(this@MainActivity, SearchScActivity::class.java))
                 }
             })
 
