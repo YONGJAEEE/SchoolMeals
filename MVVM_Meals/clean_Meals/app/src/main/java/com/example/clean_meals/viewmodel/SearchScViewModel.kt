@@ -52,6 +52,7 @@ class SearchScViewModel : ViewModel(){
         })
     }
     fun searchScClcik(){
+        Log.d("sad","adsdas")
         getSchool()
     }
 }

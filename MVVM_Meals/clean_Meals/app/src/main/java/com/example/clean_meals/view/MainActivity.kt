@@ -1,5 +1,6 @@
 package com.example.clean_meals.view
 
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -32,6 +33,7 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+        binding.executePendingBindings()
 
         if (schoolName=="null" && officeCode=="null" && schoolId=="null"){
             val intent = Intent(this,SearchScActivity::class.java)
@@ -40,22 +42,19 @@ class MainActivity : AppCompatActivity() {
 
             val adapter = MealsPagerAdapter(supportFragmentManager)
             view_MealsPager.adapter = adapter
+            view_MealsPager.currentItem = 1
             adapter.notifyDataSetChanged()
 
-        with(MainViewModel()){
-            schoolChageValue.observe(this@MainActivity, Observer {
-                Log.d("TAG","싸발")
-                if (schoolChageValue.value == "ok"){
-                    Log.d("TAG", "ㅈ장애인")
-                    startActivity(Intent(this@MainActivity, SearchScActivity::class.java))
-                }
-            })
-
+        with(viewModel){
             liveDate.observe(this@MainActivity, Observer {
                 tv_date.setText(liveDate.value)
             })
+            button.observe(this@MainActivity, Observer {
+                Log.d("TAG","asd")
+                val intent = Intent(this@MainActivity,SearchScActivity::class.java)
+                startActivity(intent)
+            })
         }
     }
-
 
 }

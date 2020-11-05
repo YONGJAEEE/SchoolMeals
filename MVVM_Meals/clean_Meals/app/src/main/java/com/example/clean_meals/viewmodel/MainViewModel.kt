@@ -8,8 +8,10 @@ import androidx.lifecycle.ViewModel
 import com.example.clean_meals.model.Meal
 import com.example.clean_meals.model.MealsResponse
 import com.example.clean_meals.network.RetrofitClient
+import com.example.clean_meals.view.MainActivity
 import com.example.clean_meals.widget.DataUtil
 import com.example.clean_meals.widget.MyApplication
+import com.example.clean_meals.widget.SingleLiveEvent
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -20,7 +22,8 @@ class MainViewModel : ViewModel() {
     var schoolName = MyApplication.prefs.getString("schoolName", "null")
     var officeCode = MyApplication.prefs.getString("officeCode", "null")
     var schoolId = MyApplication.prefs.getString("schoolId", "null")
-    var schoolChageValue = MutableLiveData<String>()
+
+    val button = SingleLiveEvent<Unit>()
 
     var date: LocalDate = LocalDate.now()
     var liveDate = MutableLiveData(date.toString())
@@ -40,9 +43,7 @@ class MainViewModel : ViewModel() {
         getMeals(date.toString())
         liveDate.value = date.toString()
     }
-    fun schoolChange(){
-        schoolChageValue.value = "ok"
-    }
+
 
     private fun getMeals(dateString: String) {
         val call: Call<MealsResponse> =
@@ -50,7 +51,6 @@ class MainViewModel : ViewModel() {
         call.enqueue(object : Callback<MealsResponse> {
             override fun onResponse(call: Call<MealsResponse>, response: Response<MealsResponse>) {
                 val responseData = response.body()
-
                 val meal = Meal(
                     null,
                     null,
@@ -75,7 +75,18 @@ class MainViewModel : ViewModel() {
                         meal.dinner = responseData.data.meal[2].replace("<br/>", "\n\n")
                     }
                 }
-
+                    if (meal.breakfast == null) {
+                        meal.breakfast = "급식이 없습니다."
+                    }
+                    if (meal.lunch == null) {
+                        meal.lunch = "급식이 없습니다."
+                    }
+                    if (meal.dinner == null) {
+                        meal.dinner = "급식이 없습니다."
+                    }
+                Log.d("Success", meal.toString())
+                DataUtil.meal.value = meal
+            }
                 if (meal.breakfast == null) {
                     meal.breakfast = "급식이 없습니다."
                 }
@@ -85,14 +96,16 @@ class MainViewModel : ViewModel() {
                 if (meal.dinner == null) {
                     meal.dinner = "급식이 없습니다."
                 }
-                Log.d("Success", meal.toString())
-                DataUtil.meal.value = meal
-            }
+
             }
 
             override fun onFailure(call: Call<MealsResponse>, t: Throwable) {
                 Log.d("Fail", t.toString())
             }
         })
+    }
+
+    fun buttonCall(){
+        button.call()
     }
 }

@@ -14,7 +14,6 @@
     android:background="#f6f6f6"
     tools:context=".view.MainActivity">
 
-
     <TextView
         android:id="@+id/tv_ScName"
         android:layout_width="wrap_content"
@@ -30,7 +29,7 @@
 
     <ImageButton
         android:id="@+id/btn_setting"
-        android:onClick="@{()->viewModel.schoolChange()}"
+        android:onClick="@{()->viewModel.buttonCall()}"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#f6f6f6"
