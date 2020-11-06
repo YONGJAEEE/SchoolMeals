@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.clean_meals">
+    package="com.yongjaeMeal.cleanMeals">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".widget.MyApplication"
+        android:name="com.yongjaeMeal.cleanMeals.widget.MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@mipmap/ic_main"
+        android:label="급식앱"
+        android:roundIcon="@mipmap/ic_main_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
-        <activity android:name=".view.SearchScActivity">
+        <activity android:name="com.yongjaeMeal.cleanMeals.view.SearchScActivity">
 
         </activity>
-        <activity android:name=".view.MainActivity">
+        <activity android:name="com.yongjaeMeal.cleanMeals.view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
