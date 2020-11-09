@@ -35,14 +35,13 @@ class MainViewModel : ViewModel() {
         date = date.minusDays(1)
         getMeals(date.toString())
         liveDate.value = date.toString()
-
     }
+
     fun nextDay(){
         date = date.plusDays(1)
         getMeals(date.toString())
         liveDate.value = date.toString()
     }
-
 
     private fun getMeals(dateString: String) {
         val call: Call<MealsResponse> =
