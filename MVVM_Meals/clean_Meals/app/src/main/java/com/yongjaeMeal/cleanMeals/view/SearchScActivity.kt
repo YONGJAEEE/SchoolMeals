@@ -30,6 +30,8 @@ class SearchScActivity : AppCompatActivity() {
 
         with(viewModel) {
             createAdapter.observe(this@SearchScActivity, Observer {
+                if (schoolList.size == 0) tv_nullSearch.text = "검색 결과가 없습니다."
+                else tv_nullSearch.text = ""
                 val mAdapter = ScListAdapter(schoolList)
                 Rv.adapter = mAdapter
             })
