@@ -8,7 +8,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.yongjaeMeal.cleanMeals.R
-import com.yongjaeMeal.cleanMeals.databinding.BreakfastFragmentBinding
 import com.yongjaeMeal.cleanMeals.databinding.LunchFragmentBinding
 import com.yongjaeMeal.cleanMeals.viewmodel.LunchViewModel
 import com.yongjaeMeal.cleanMeals.widget.DataUtil
