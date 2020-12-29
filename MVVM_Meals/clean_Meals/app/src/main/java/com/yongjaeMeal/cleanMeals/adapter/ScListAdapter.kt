@@ -16,7 +16,7 @@ import com.yongjaeMeal.cleanMeals.view.MainActivity
 import com.yongjaeMeal.cleanMeals.viewmodel.SearchScViewModel
 import com.yongjaeMeal.cleanMeals.widget.MyApplication
 
-class ScListAdapter(val memoList : ArrayList<School>) : RecyclerView.Adapter<ScListAdapter.Holder>(){
+class ScListAdapter(val schoolList : ArrayList<School>) : RecyclerView.Adapter<ScListAdapter.Holder>(){
 
     var viewModel = SearchScViewModel()
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView){
@@ -61,10 +61,10 @@ class ScListAdapter(val memoList : ArrayList<School>) : RecyclerView.Adapter<ScL
     }
 
     override fun getItemCount(): Int {
-        return memoList.size
+        return schoolList.size
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder.bind(memoList[position])
+        holder.bind(schoolList[position])
     }
 }

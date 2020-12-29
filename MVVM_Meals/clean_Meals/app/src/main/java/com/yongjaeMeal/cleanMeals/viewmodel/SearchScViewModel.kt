@@ -14,12 +14,11 @@ class SearchScViewModel : ViewModel(){
 
     var createAdapter = MutableLiveData<Boolean>()
     var nullSearch = "검색 결과가 없습니다."
-    var statusValue = MutableLiveData<Int>()
     var schoolList = ArrayList<School>()
     var et_School = ""
     var ScName = ""
 
-    private fun getSchool(){
+    fun getSchool(){
         val call : Call<ScResponse> = RetrofitClient.instance.GetData.SearchSc(et_School)
         call.enqueue(object : Callback<ScResponse> {
             override fun onResponse(call: Call<ScResponse>, response: Response<ScResponse>) {
@@ -30,16 +29,10 @@ class SearchScViewModel : ViewModel(){
                         Log.d("Success", Response.toString())
                         schoolList = Response.data?.school as ArrayList<School>
                         nullSearch = ""
-                        statusValue.value = Response.status
                         createAdapter.value = true
                     } else {
                         Log.d("fail",Response.toString())
-                        statusValue.value = Response.status
                     }
-                }
-
-                else{
-                    statusValue.value = Response?.status
                 }
             }
 
@@ -47,8 +40,5 @@ class SearchScViewModel : ViewModel(){
                 Log.d("retrofit fail", t.toString())
             }
         })
-    }
-    fun searchScClcik(){
-        getSchool()
     }
 }
